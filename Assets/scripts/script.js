@@ -1,9 +1,9 @@
 var quizIntro = document.querySelector(".quiz-intro");
-
-
 var startButton = document.querySelector("#get-started");
 
-const question1 = {
+var timer = document.getElementById("time");
+time = timer.innerHTML;
+const question1 = { 
     "What does DOM stand for?": [
         "Don't Over Motivate",
         "Document Object Management",
@@ -32,18 +32,41 @@ let globalScore = 0;
 const questionArray = [question1];
 
 
-const questionButtonHandler = (targetButton, answer, questionList) => {
+const postQuizScreen = (score) => {
+    console.log(score);
+}
 
+
+const setTimer = (time) => {
+    startQuiz();
+
+    var timerElement = setInterval( () => {
+
+        time--;
+
+        timer.innerHTML = time;
+
+
+        if (time == 0) {
+            clearInterval(timerElement);
+            postQuizScreen(globalScore);
+            const box = document.querySelector(".question-container");
+            box.setAttribute("style", "display: none");
+        }
+
+    }, 250)
+}
+
+
+
+
+
+
+const questionButtonHandler = (targetButton, answer) => {
     if (targetButton.innerHTML == answer) {
         globalScore += 10;
-        while (questionList.hasChildNodes()) {
-            questionList.removeChild(questionList.children[0]);
-        }
+        console.log(globalScore);
     }
-
-
-
-
 }
 
 const startQuiz = (questioneEle, AnswerEle) => {
@@ -70,19 +93,14 @@ const startQuiz = (questioneEle, AnswerEle) => {
             buttonAnswers.innerHTML = selection[j];
             answerButtonsList.push(buttonAnswers);
         }
-            // buttonAnswers.addEventListener('click',  () => {
-            //     questionButtonHandler(buttonAnswers, answer);
-            // ;
 
 
         for (let i = 0; i < answerButtonsList.length; i ++) {
             answerButtonsList[i].addEventListener('click', () => {
-                questionButtonHandler(answerButtonsList[i], answer, questionList);
-
+                questionButtonHandler(answerButtonsList[i], answer);
             });
             questionList.appendChild(answerButtonsList[i]);
 
-            while (questionList.hasChildNodes()) {continue};
         }
     }
 }
@@ -91,7 +109,7 @@ const startQuiz = (questioneEle, AnswerEle) => {
 const hideElements = () => {
     quizIntro.setAttribute("style", "display: none");
     startButton.setAttribute("style", "display: none");
-    startQuiz();
+    setTimer(time);
 }
 
 
@@ -116,5 +134,3 @@ startButton.addEventListener('click', hideElements);
 // maybe a bool variable. If player is done with quiz 
 // Then change to true then display based on that 
 
-
-// Biggest issue: how do I populate HTML with JS repeatedly?
