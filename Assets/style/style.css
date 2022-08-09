@@ -69,7 +69,7 @@ a:visited {
 }
 
 #get-started:hover {
-    background-color: rgb(166, 40, 233);
+    background-color: rgb(66, 32, 237);
 }
 
 
@@ -105,4 +105,50 @@ a:visited {
     padding: 15px 10px;
     width: 100%;
     margin: 10px 0;
+}
+
+.completion-container  {
+    display: none;
+    justify-content: center;
+    margin: 0 auto;
+    width: 50%;
+    border: 3px solid black;
+    text-align: center;
+    min-height: 300px;  
+}
+
+.completion-title {
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+
+.completion-form {
+    /* display: none; */
+    width: 100%;
+}
+
+.completion-form input {
+    margin: 10px;
+}
+
+#score {
+    background-color: rgb(236, 234, 234);
+}
+
+.final-scores-container {
+    display: none;
+    min-height: 300px;
+    border: 3pc solid black;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.disabled {
+    color: rgb(185, 185, 185);
+    text-decoration: none;
+}
+
+.active {
+
 }

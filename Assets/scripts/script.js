@@ -53,40 +53,83 @@ const question5 = {
     "Answer": "Cascading Style Sheets"
 }
 
+const question6 = {
+    "What are the ways to define variables in JavaScript?": [
+        "Var Def Make",
+        "Def Make Set",
+        "Var Let Const",
+        "Let Make Def"
+    ],
+    "Answer":"Var Let Const"
+}
+
+const question7 = {
+
+}
+
 
 let globalCount = 0;
 let globalScore = 0;
 
-// right answer will give 10 points 
+// right answer will give 10 points     
 
 
 // Add more questions later
-const questionArray = [question1, question2, question3];
+const questionArray = [question1, question2, question3,
+     question4, question5, question6];
 
 const maxCount = questionArray.length;
 const maxScore = maxCount * 10;
 
-const postQuizScreen = (score) => {
-    console.log(score);
+const submitFinalScore = (e) => {
+    e.preventDefault();
+    const nameSubmit = document.querySelector("#initials");
+    const submitObject = {"intitials": nameSubmit.value, "score": globalScore};
+    // console.log(nameSubmit.textContent);
+    // console.log(typeof nameSubmit.textContent);
+    localStorage.setItem(nameSubmit.value, globalScore);
+
 }
 
 
-const setTimer = (time) => {
-    // startQuiz();
+// Could use this
+const postQuizScreen = () => {
+    const completion = document.querySelector(".completion-container");
+    completion.setAttribute("style", "display: block");
+    const completionDescr = document.querySelector(".completion-descr");
+    completionDescr.textContent = `You Scored ${globalScore} points`;
+    const scoreInput = document.querySelector("#score");
+    console.log(scoreInput)
+    scoreInput.value = globalScore;
+
+    const submitButton = document.querySelector("#complete-submit");
+    submitButton.addEventListener('click', submitFinalScore);
+}
+
+let globalTime = 20;
+
+
+const setTimer = () => {
     newQuiz(questionArray, globalCount);
+
+    const box = document.querySelector(".question-container");
 
     var timerElement = setInterval( () => {
 
-        time--;
+        globalTime--;
 
-        timer.innerHTML = time;
+        timer.textContent = globalTime;
 
 
-        if (time == 0) {
+        if (globalTime <= 0 || box.style.display == "none") {
             clearInterval(timerElement);
-            postQuizScreen(globalScore);
-            const box = document.querySelector(".question-container");
             box.setAttribute("style", "display: none");
+            postQuizScreen(globalScore);
+            timer.textContent = 0;
+            
+
+
+
         }
 
     }, 1000);
@@ -95,7 +138,9 @@ const setTimer = (time) => {
 const questionButtonHandler = (targetButton, answer, questionList) => {
     if (targetButton.innerHTML == answer) {
         globalScore += 10;
-        console.log(globalScore);
+    }
+    else {
+        globalTime -= 5;
     }
     while (questionList.children.length > 0) {
         questionList.removeChild(questionList.firstChild);
@@ -105,49 +150,15 @@ const questionButtonHandler = (targetButton, answer, questionList) => {
     newQuiz(questionArray, globalCount);
 }
 
-// const startQuiz = (questioneEle, AnswerEle) => {
-//     const questionBox = document.querySelector(".question-container");
-//     questionBox.setAttribute("style", "display: block");
-//     for (let quizItem of questionArray) {
-//         // The actualy question for each question
-//         const question = Object.keys(quizItem)[0];
-//         const answer = Object.entries(quizItem)[1][1];
-//         console.log(answer);
-//         //  This is an array.
-//         const selection = Object.entries(quizItem)[0][1];
-
-//         document.querySelector(".question-title").innerHTML = question;
-
-//         const questionList = document.querySelector(".question-list");
-//         console.log(questionList);
-
-//         const answerButtonsList = [];
-
-//         for( let j = 0; j < selection.length; j++) {
-//             const buttonAnswers = document.createElement('button');
-//             buttonAnswers.setAttribute('text', selection[j]);
-//             buttonAnswers.innerHTML = selection[j];
-//             answerButtonsList.push(buttonAnswers);
-//         }
-
-
-//         for (let i = 0; i < answerButtonsList.length; i ++) {
-//             answerButtonsList[i].addEventListener('click', () => {
-//                 questionButtonHandler(answerButtonsList[i], answer);
-//             });
-//             questionList.appendChild(answerButtonsList[i]);
-//         }
-//     }
-// }
 
 const newQuiz  = (questions, count) => {
 
     const questionBox = document.querySelector(".question-container");
     questionBox.setAttribute("style", "display: block");
     if (count == maxCount) {
-        console.log('done');
-        // questionBox.setAttribute("style", "display: none");
-        // return;
+        questionBox.setAttribute("style", "display: none");
+        postQuizScreen();
+        return;
     }
     const currentQuestion = Object.entries(questions[count])[0][0];
     const currentResponses = Object.entries(questions[count])[0][1];
@@ -173,7 +184,7 @@ const newQuiz  = (questions, count) => {
 const hideElements = () => {
     quizIntro.setAttribute("style", "display: none");
     startButton.setAttribute("style", "display: none");
-    setTimer(time);
+    setTimer(globalTime);
 }
 
 startButton.addEventListener('click', hideElements);

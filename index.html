@@ -12,7 +12,7 @@
     <header>
         <nav>
             <ul>
-                <li><a href="">Scores</a></li>
+                <li><a href="" id="get-scores" class="disabled">Scores</a></li>
                 <li>
                     <div class="timer-container">
                         <p class="timer-label">Timer: </p>
@@ -48,6 +48,21 @@
 
         <ul class="question-list">
         </ul>
+    </div>
+
+    <div class="completion-container">
+        <p class="completion-title">Congratulations!</p>
+        <p class="completion-descr"></p>
+
+        <form class="completion-form">
+            <label for="intitials">Initials: </label>
+            <input type="text" id="initials" maxlength="2">
+            <br>
+            <label for="score">Score: </label>
+            <input type="text" id="score" readonly>
+            <br>
+            <button id="complete-submit">Submit</button>
+        </form>
     </div>
 
     
