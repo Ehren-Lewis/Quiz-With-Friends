@@ -137,18 +137,28 @@ a:visited {
 }
 
 .final-scores-container {
-    display: none;
+    /* display: none; */
     min-height: 300px;
-    border: 3pc solid black;
+    border: 3px solid black;
     width: 50%;
     margin: 0 auto;
 }
 
-.disabled {
-    color: rgb(185, 185, 185);
-    text-decoration: none;
+    
+#score-table {
+    width: 100%;
+    height: inherit;
+    text-align: center;
+    border-collapse: collapse;
+
 }
 
-.active {
+tr:nth-child(even) {
+    background-color: rgb(220, 245, 224);
 
 }
+
+.finals-hider {
+    display: none;
+}
+

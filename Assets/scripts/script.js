@@ -1,8 +1,6 @@
-var quizIntro = document.querySelector(".quiz-intro");
-var startButton = document.querySelector("#get-started");
+time = timer.textContent;
 
-var timer = document.getElementById("time");
-time = timer.innerHTML;
+
 const question1 = { 
     "What does DOM stand for?": [
         "Don't Over Motivate",
@@ -67,12 +65,9 @@ const question7 = {
 
 }
 
-
 let globalCount = 0;
 let globalScore = 0;
-
-// right answer will give 10 points     
-
+let globalTime = 20;
 
 // Add more questions later
 const questionArray = [question1, question2, question3,
@@ -81,61 +76,99 @@ const questionArray = [question1, question2, question3,
 const maxCount = questionArray.length;
 const maxScore = maxCount * 10;
 
-const submitFinalScore = (e) => {
-    e.preventDefault();
-    const nameSubmit = document.querySelector("#initials");
-    const submitObject = {"intitials": nameSubmit.value, "score": globalScore};
-    // console.log(nameSubmit.textContent);
-    // console.log(typeof nameSubmit.textContent);
-    localStorage.setItem(nameSubmit.value, globalScore);
 
+const showScores = () => {
+
+    const finalScores = document.querySelector(".finals-hider");
+    const completions = document.querySelector(".completion-container");
+
+    completions.setAttribute("style", "display: none");
+    finalScores.setAttribute("style", "display: block");
+
+    const scores = JSON.parse(localStorage.getItem('scores'));
+
+
+    const table = document.querySelector("#score-table");
+
+    for (let i = 0; i < scores.length; i++ ) {
+
+        const currentObject = scores[i];
+        const newRow = table.insertRow(-1);
+
+        const cell1 = newRow.insertCell(0);
+        const cell1Text = document.createTextNode(Object.values(currentObject)[0]);
+        cell1.appendChild(cell1Text);
+
+        const cell2 = newRow.insertCell(1);
+        const cell2Text = document.createTextNode(Object.values(currentObject)[1]);
+        cell2.appendChild(cell2Text);
+    }
 }
 
 
-// Could use this
+const submitFinalScore = (e) => {
+    e.preventDefault();
+    const nameSubmit = document.querySelector("#initials");
+    if (nameSubmit.value == '') {
+        return;
+    }
+    const submitObject = {"intitials": nameSubmit.value, "score": globalScore};
+    const allScores = localStorage.getItem('scores');
+
+    let allScoresMid = JSON.parse(allScores);   
+    let appendArray =  [];
+
+    if (allScoresMid != null) {
+        appendArray = allScoresMid;
+    }
+
+    appendArray.push(submitObject);
+
+    localStorage.setItem('scores', JSON.stringify(appendArray));
+    showScores();
+}
+
 const postQuizScreen = () => {
+
     const completion = document.querySelector(".completion-container");
     completion.setAttribute("style", "display: block");
+
     const completionDescr = document.querySelector(".completion-descr");
     completionDescr.textContent = `You Scored ${globalScore} points`;
+
     const scoreInput = document.querySelector("#score");
-    console.log(scoreInput)
     scoreInput.value = globalScore;
 
     const submitButton = document.querySelector("#complete-submit");
     submitButton.addEventListener('click', submitFinalScore);
 }
 
-let globalTime = 20;
 
 
 const setTimer = () => {
+
     newQuiz(questionArray, globalCount);
 
+    var timer = document.getElementById("time");
     const box = document.querySelector(".question-container");
 
     var timerElement = setInterval( () => {
 
         globalTime--;
-
         timer.textContent = globalTime;
-
 
         if (globalTime <= 0 || box.style.display == "none") {
             clearInterval(timerElement);
             box.setAttribute("style", "display: none");
             postQuizScreen(globalScore);
             timer.textContent = 0;
-            
-
-
-
         }
 
     }, 1000);
 }
 
 const questionButtonHandler = (targetButton, answer, questionList) => {
+
     if (targetButton.innerHTML == answer) {
         globalScore += 10;
     }
@@ -161,10 +194,12 @@ const newQuiz  = (questions, count) => {
         return;
     }
     const currentQuestion = Object.entries(questions[count])[0][0];
+
     const currentResponses = Object.entries(questions[count])[0][1];
     const answer = Object.entries(questions[count])[1][1];
 
     const questionEle = document.querySelector(".question-title");
+
     questionEle.textContent = currentQuestion;
 
     const questionList = document.querySelector(".question-list");
@@ -176,12 +211,12 @@ const newQuiz  = (questions, count) => {
             });
             questionList.appendChild(buttonAnswers);
     }
-
-    const questionNodes = questionList.childNodes;
 }
 
+var startButton = document.querySelector("#get-started");
 
 const hideElements = () => {
+    var quizIntro = document.querySelector(".quiz-intro");
     quizIntro.setAttribute("style", "display: none");
     startButton.setAttribute("style", "display: none");
     setTimer(globalTime);
