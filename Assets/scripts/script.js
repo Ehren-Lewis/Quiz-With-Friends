@@ -23,6 +23,37 @@ const question2 = {
     "Answer": "HyperText Markup Language"
 }
 
+const question3 = {
+    "What is the first index of an array?": [
+        "0",
+        "1",
+        "start",
+        "first"
+    ],
+    "Answer": "0"
+}
+
+const question4 = {
+    "What type of programming language is JavaScipt?": [
+        "Functional",
+        "Data-Oriented",
+        "Machine",
+        "Procedural"
+    ],
+    "Answer":"Procedural"
+}
+
+const question5 = {
+    "What does CSS stand for?": [
+        "Cascading Style Sheets",
+        "Corresponding Style Sheets",
+        "Cascading Source Sheets",
+        "Corresponding Source Sheets"
+    ],
+    "Answer": "Cascading Style Sheets"
+}
+
+
 let globalCount = 0;
 let globalScore = 0;
 
@@ -30,9 +61,10 @@ let globalScore = 0;
 
 
 // Add more questions later
-const questionArray = [question1, question2];
+const questionArray = [question1, question2, question3];
 
 const maxCount = questionArray.length;
+const maxScore = maxCount * 10;
 
 const postQuizScreen = (score) => {
     console.log(score);
@@ -135,7 +167,6 @@ const newQuiz  = (questions, count) => {
     }
 
     const questionNodes = questionList.childNodes;
-
 }
 
 
