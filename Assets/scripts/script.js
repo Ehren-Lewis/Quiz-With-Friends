@@ -75,6 +75,8 @@ const questionArray = [question1, question2, question3,
 const maxCount = questionArray.length;
 const maxScore = maxCount * 10;
 
+const returnButton = document.querySelector("#home");
+
 
 const showScores = (e) => {
     if (e.target.textContent == "Submit") {
