@@ -1,4 +1,3 @@
-time = timer.textContent;
 
 
 const question1 = { 
@@ -77,16 +76,27 @@ const maxCount = questionArray.length;
 const maxScore = maxCount * 10;
 
 
-const showScores = () => {
+const showScores = (e) => {
+    if (e.target.textContent == "Submit") {
+    const completions = document.querySelector(".completion-container");
+    completions.setAttribute("style", "display: none");
+    }
 
     const finalScores = document.querySelector(".finals-hider");
-    const completions = document.querySelector(".completion-container");
-
-    completions.setAttribute("style", "display: none");
     finalScores.setAttribute("style", "display: block");
 
     const scores = JSON.parse(localStorage.getItem('scores'));
 
+// Credit goes to geeksforgeeks for the Bubble sort
+    for (let i = 0; i < scores.length; i++) {
+        for (let j = 0; j < scores.length - i - 1; j++) {
+            if (scores[j].score < scores[j +1 ].score) {
+                var temp = scores[j];
+                scores[j] = scores[j + 1];
+                scores[j + 1] = temp;
+            }
+        }
+    }
 
     const table = document.querySelector("#score-table");
 
@@ -125,7 +135,7 @@ const submitFinalScore = (e) => {
     appendArray.push(submitObject);
 
     localStorage.setItem('scores', JSON.stringify(appendArray));
-    showScores();
+    showScores(e);
 }
 
 const postQuizScreen = () => {
@@ -146,6 +156,7 @@ const postQuizScreen = () => {
 
 
 const setTimer = () => {
+    scoresButton.removeEventListener('click', hideElements);
 
     newQuiz(questionArray, globalCount);
 
@@ -213,17 +224,23 @@ const newQuiz  = (questions, count) => {
     }
 }
 
+var scoresButton = document.querySelector("#get-scores");
 var startButton = document.querySelector("#get-started");
 
-const hideElements = () => {
+const hideElements = (e) => {    
     var quizIntro = document.querySelector(".quiz-intro");
     quizIntro.setAttribute("style", "display: none");
     startButton.setAttribute("style", "display: none");
-    setTimer(globalTime);
+    if (e.target.textContent == "Get Started!") {
+    setTimer();
+    }
+    else if ( e.target.textContent == "Scores") {
+        showScores(e);
+    }
 }
 
 startButton.addEventListener('click', hideElements);
-
+scoresButton.addEventListener('click', hideElements);
 // Test psuedo code
 // Have there be a question container with display none
 // with each questions, change display to next

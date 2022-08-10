@@ -25,7 +25,7 @@ THEN a timer starts and I am presented with a question: done
 WHEN I answer a question
 THEN I am presented with another question: done
 WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
+THEN time is subtract   ed from the clock: done
 WHEN all questions are answered or the timer reaches 0: done
 THEN the game is over
 WHEN the game is over: kinda done
