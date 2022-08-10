@@ -61,22 +61,63 @@ const question6 = {
 }
 
 const question7 = {
+    "How do you print to the console in JavaScript?": [
+        "console.log(message)",
+        "print(message)",
+        "std.cout << message",
+        "echo << message "
 
+    ],
+    "Answer": "console.log(message)"
 }
 
+const question8 = {
+    "How do you get items from local storage?": [
+        "document.getItem(value)",
+        "localStorage.setItem(key)",
+        "location.getItem(key)",
+        "localStorage.getItem(key)"
+
+    ],
+    "Answer": "localStorage.getItem(key)"
+}
+
+const question9 = {
+    "How do you add events to elements?": [
+        "element.AddEventListener(event, function)",
+        "document.AddEventListener(event, function)",
+        "element.criteria(response, function)",
+        "document.criteria(response, function)"
+    ],
+    "Answer": "element.AddEventListener(event, function)"
+}
+
+const question10 = {
+    "what does '==' mean in comparison?": [
+        "Checks values and data types",
+        "Sets the left value equal to the right",
+        "Check values but not data types",
+        "Sets the right value equal to the left"
+
+    ],
+    "Answer": "Check values but not data types"
+}
 let globalCount = 0;
 let globalScore = 0;
-let globalTime = 20;
+let globalTime = 60;
 
 // Add more questions later
 const questionArray = [question1, question2, question3,
-     question4, question5, question6];
+    question4, question5, question6, question7,
+    question8, question9, question10];
 
 const maxCount = questionArray.length;
 const maxScore = maxCount * 10;
 
 const returnButton = document.querySelector("#home");
-
+returnButton.addEventListener('click',  () => {
+    location.reload();
+});
 
 const showScores = (e) => {
     if (e.target.textContent == "Submit") {
@@ -146,7 +187,7 @@ const postQuizScreen = () => {
     completion.setAttribute("style", "display: block");
 
     const completionDescr = document.querySelector(".completion-descr");
-    completionDescr.textContent = `You Scored ${globalScore} points`;
+    completionDescr.textContent = `You Scored ${globalScore} out of ${maxCount * 10} points`;
 
     const scoreInput = document.querySelector("#score");
     scoreInput.value = globalScore;
@@ -161,6 +202,9 @@ const setTimer = () => {
     scoresButton.removeEventListener('click', hideElements);
 
     newQuiz(questionArray, globalCount);
+    globalTime = 60;
+
+    document.querySelector("#time").textContent = 60;
 
     var timer = document.getElementById("time");
     const box = document.querySelector(".question-container");
@@ -204,6 +248,7 @@ const newQuiz  = (questions, count) => {
     if (count == maxCount) {
         questionBox.setAttribute("style", "display: none");
         postQuizScreen();
+        count = 0; 
         return;
     }
     const currentQuestion = Object.entries(questions[count])[0][0];
@@ -237,7 +282,7 @@ const hideElements = (e) => {
     setTimer();
     }
     else if ( e.target.textContent == "Scores") {
-        showScores(e);
+    showScores(e);
     }
 }
 
