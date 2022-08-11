@@ -11,7 +11,7 @@ As well, this project was only built with HTML, CSS, and JavaScript
 
 I learned about how to use getting and setting items to local storage, how to implement a timer function that essentially run asynchronously from the quiz itself. I learned more about object manipulation and traversing bigger length data structures, such as an array of objects.
 
-known issues: There is nothing set for mobile responsiveness, so there may be an issue on viewing it on smaller screens.S
+known issues: There is nothing set for mobile responsiveness, so there may be an issue on viewing it on smaller screens.
 
 For future versions: I would like to switch the setup from localstorage to a databse system, and perhaps switching it from pure vanilla jacascript to jquery
 
