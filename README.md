@@ -38,3 +38,11 @@ once more knowledge has been acheived.
 
 One the quiz is completed (or the timer has hit 0), then the user will be presented their score, as well as a form for them to be able to input their
 initials. Refreshing at any point will lose ones score and one will have to take the entire quiz over again. If one hits submit, they will be presented with the a table of all submitted scores that are stored in ones local storage. These will be sorted form highest to lowest. From their, one may exit the browser, or press the home button to attempt the quiz again.
+
+![Screenshot of the Elements visible when first loading the page](./Assets/Images/Landing.png)
+
+![An example of one of the quiestions present during the quiz](./Assets/Images/ExampleQuestion.png)
+
+![Results of the quiz once either the timer has run out or there are no more question ](./Assets/Images/QuizFinishPage.png)
+
+![Every score stored in local storage, sorted from highest value to lowest value, regardless of Initials](./Assets/Images/QuizResults.png)
