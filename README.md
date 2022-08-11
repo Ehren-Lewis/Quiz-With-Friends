@@ -4,8 +4,16 @@ Author: Ehren Lewis
 
 # About This Project
 The motivation for this project was wanting to create my own qquiz application, because knowing how to create my own quiz application and answers means that I myself know the answers, boosting my programming knowledge in the process.
+
 I built this project to allow for individuals to test their knowledge on the foundations of HTML, CSS, and JavaScript.
+
+As well, this project was only built with HTML, CSS, and JavaScript
+
 I learned about how to use getting and setting items to local storage, how to implement a timer function that essentially run asynchronously from the quiz itself. I learned more about object manipulation and traversing bigger length data structures, such as an array of objects.
+
+known issues: There is nothing set for mobile responsiveness, so there may be an issue on viewing it on smaller screens.S
+
+For future versions: I would like to switch the setup from localstorage to a databse system, and perhaps switching it from pure vanilla jacascript to jquery
 
 # How to Install
 
@@ -41,7 +49,7 @@ initials. Refreshing at any point will lose ones score and one will have to take
 
 ![Screenshot of the Elements visible when first loading the page](./Assets/Images/Landing.png)
 
-![An example of one of the quiestions present during the quiz](./Assets/Images/ExampleQuestion.png)
+![An example of one of the questions present during the quiz](./Assets/Images/ExampleQuestion.png)
 
 ![Results of the quiz once either the timer has run out or there are no more question ](./Assets/Images/QuizFinishPage.png)
 
