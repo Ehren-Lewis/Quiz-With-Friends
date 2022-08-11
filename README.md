@@ -3,7 +3,9 @@
 Author: Ehren Lewis
 
 # About This Project
-
+The motivation for this project was wanting to create my own qquiz application, because knowing how to create my own quiz application and answers means that I myself know the answers, boosting my programming knowledge in the process.
+I built this project to allow for individuals to test their knowledge on the foundations of HTML, CSS, and JavaScript.
+I learned about how to use getting and setting items to local storage, how to implement a timer function that essentially run asynchronously from the quiz itself. I learned more about object manipulation and traversing bigger length data structures, such as an array of objects.
 
 # How to Install
 
@@ -18,8 +20,8 @@ Author: Ehren Lewis
 1. Visit the live site
 2. Copy the files from the developer tools into your own files
 
-link to repository: 
-link to live site: 
+link to repository: https://github.com/Ehren-Lewis/Quiz-With-Friends
+link to live site: https://ehren-lewis.github.io/Quiz-With-Friends/
 
 # Usage
 

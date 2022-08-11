@@ -130,7 +130,12 @@ const showScores = (e) => {
 
     const scores = JSON.parse(localStorage.getItem('scores'));
 
-// Credit goes to geeksforgeeks for the Bubble sort
+// Author: @_saurabh_jaiswal
+// Date accessed: 8/10/2022
+// title: Bubble Sort Algorithms by Using JavaScript
+// type: source code
+// Link: https://www.geeksforgeeks.org/bubble-sort-algorithms-by-using-javascript/
+// version: ES6
     for (let i = 0; i < scores.length; i++) {
         for (let j = 0; j < scores.length - i - 1; j++) {
             if (scores[j].score < scores[j +1 ].score) {
@@ -240,7 +245,6 @@ const questionButtonHandler = (targetButton, answer, questionList) => {
     newQuiz(questionArray, globalCount);
 }
 
-
 const newQuiz  = (questions, count) => {
 
     const questionBox = document.querySelector(".question-container");
@@ -288,17 +292,4 @@ const hideElements = (e) => {
 
 startButton.addEventListener('click', hideElements);
 scoresButton.addEventListener('click', hideElements);
-// Test psuedo code
-// Have there be a question container with display none
-// with each questions, change display to next
-
-// Each question will be a button wrapped in a list
-// On click, check the value of the button 
-// if that value == question answer, they get more points
-
-// timeout function
-// what to do when timeout function hits 0? 
-// Have another CredentialsContainer, display none 
-// maybe a bool variable. If player is done with quiz 
-// Then change to true then display based on that 
 
