@@ -1,5 +1,5 @@
 
-
+// Mass question definition
 const question1 = { 
     "What does DOM stand for?": [
         "Don't Over Motivate",
@@ -106,7 +106,6 @@ let globalCount = 0;
 let globalScore = 0;
 let globalTime = 60;
 
-// Add more questions later
 const questionArray = [question1, question2, question3,
     question4, question5, question6, question7,
     question8, question9, question10];
@@ -119,6 +118,7 @@ returnButton.addEventListener('click',  () => {
     location.reload();
 });
 
+// Only show scores when you submit
 const showScores = (e) => {
     if (e.target.textContent == "Submit") {
     const completions = document.querySelector(".completion-container");
@@ -163,7 +163,7 @@ const showScores = (e) => {
     }
 }
 
-
+// Sets and gets locaal storage
 const submitFinalScore = (e) => {
     e.preventDefault();
     const nameSubmit = document.querySelector("#initials");
@@ -186,6 +186,8 @@ const submitFinalScore = (e) => {
     showScores(e);
 }
 
+
+// Shows immediately after the quiz is completed
 const postQuizScreen = () => {
 
     const completion = document.querySelector(".completion-container");
@@ -202,8 +204,9 @@ const postQuizScreen = () => {
 }
 
 
-
+// First function that is called when the quiz starts
 const setTimer = () => {
+    // cannot access the scores in the middle of the quic
     scoresButton.removeEventListener('click', hideElements);
 
     newQuiz(questionArray, globalCount);
@@ -219,6 +222,7 @@ const setTimer = () => {
         globalTime--;
         timer.textContent = globalTime;
 
+        // Checks if the boz is none, hence the quiz is over
         if (globalTime <= 0 || box.style.display == "none") {
             clearInterval(timerElement);
             box.setAttribute("style", "display: none");
@@ -245,6 +249,8 @@ const questionButtonHandler = (targetButton, answer, questionList) => {
     newQuiz(questionArray, globalCount);
 }
 
+
+// This quix
 const newQuiz  = (questions, count) => {
 
     const questionBox = document.querySelector(".question-container");
@@ -290,6 +296,8 @@ const hideElements = (e) => {
     }
 }
 
+// These have the same function call, but depending on which
+// event triggered it, will either show the quiz or take one to the scores
 startButton.addEventListener('click', hideElements);
 scoresButton.addEventListener('click', hideElements);
 
